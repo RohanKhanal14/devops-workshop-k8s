@@ -68,3 +68,25 @@
  2009  kubectl get pods -o wide 
  2010  clear
 
+minikube start --node 2 -p multi-cluster-node
+ 2052  minikube start --nodes 2 -p multi-cluster-node
+ 2053  minikube profile list 
+ 2054  minikube profile multi-cluster-node
+ 2055  kubectl get pv
+ 2056  clear
+ 2057  minikube profile list 
+ 2058  clear
+ 2059  kubectl apply -f ns.yml 
+ 2060  kubectl apply -f pv.yml 
+ 2061  kubectl apply -f pvc.yml 
+ 2062  kubectl get pv
+ 2063  kubectl get pvc 
+ 2064  kubectl get pvc -n nginx 
+ 2065  kubectl describe pvc/local-pvc
+ 2066  kubectl describe pvc/local-pvc -n nginx
+ 2067  kubectl describe pv/local-pv -n nginx
+ 2068  clea r
+ 2069  clear
+ 2070  kubectl apply -f dep.yml 
+ 2071  kubectl get pods -n nginx 
+ 2072  kubectl describe pods/nginx-deployment-5fcfbcddf8-d6r6m -n nginx
