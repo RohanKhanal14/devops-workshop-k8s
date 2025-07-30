@@ -1,92 +1,117 @@
- 2000  kubectl get nodes 
- 2001  kubectl run nginx --image=nginx 
- 2002  kubectl get pods 
+ 2000  kubectl get nodes
+ 2001  kubectl run nginx --image=nginx
+ 2002  kubectl get pods
  2003  kubectl delete pods
  2004  kubectl delete pods/nginx
- 2005  kubectl get pods 
+ 2005  kubectl get pods
  2006  kubectl get ns
  2007  kubectl get pods -n kube-system
  2008  kubectl get pods -A
  2009  clear
- 2010  kubectl create namespace hi 
- 2011  kubectl get ns 
- 2012  kubectl delete ns hi 
- 2013  clear 
+ 2010  kubectl create namespace hi
+ 2011  kubectl get ns
+ 2012  kubectl delete ns hi
+ 2013  clear
  2014  kubectl get nodes
  2016  cd Desktop/
- 2017  touch 
+ 2017  touch
  2018  touch kubernetes_devops.txt
  2019  clear
- 2020  kubectl run nginx --image=nginx 
- 2021  kubectl get pods 
+ 2020  kubectl run nginx --image=nginx
+ 2021  kubectl get pods
  2022  kubectl delete pods/nginx
- 2023  kubectl run nginx --image=nginx 
+ 2023  kubectl run nginx --image=nginx
  2024  kubectl delete pods/nginx
- 2025  kubectl get pods 
- 2026  kubectl run nginx --image=nginx 
- 2027  kubectl get pods 
- 2028  clear 
+ 2025  kubectl get pods
+ 2026  kubectl run nginx --image=nginx
+ 2027  kubectl get pods
+ 2028  clear
  2029  kubectl delete pods/nginx
  2030  mkdir k8s
  2031  cd k8s/
  2032  vi pod.yml
- 2033  kubectl apply -f pod.yml 
- 2034  kubectl get pods 
+ 2033  kubectl apply -f pod.yml
+ 2034  kubectl get pods
  2035  kubectl create namespace nginx
- 2036  kubectl delete pods/nginx 
+ 2036  kubectl delete pods/nginx
  2037  kubectl apply -f pod.yml -n nginx
- 2038  kubectl get pods 
- 2039  kubectl get pods -n nginx 
+ 2038  kubectl get pods
+ 2039  kubectl get pods -n nginx
  2040  kubectl exec -it nginx -n nginx -- bash
   1982  clear
- 1983  vi ns.yml 
- 1984  kubectl apply -f ns.yml 
- 1985  kubectl get ns 
- 1986  clear 
- 1987  ls 
+ 1983  vi ns.yml
+ 1984  kubectl apply -f ns.yml
+ 1985  kubectl get ns
+ 1986  clear
+ 1987  ls
  1988  vi dep.yml
- 1989  kubectl delete pods/nginx 
- 1990  kubectl delete pods/nginx -n nginx 
- 1991  vi dep.yml 
- 1992  kubectl get deployments 
+ 1989  kubectl delete pods/nginx
+ 1990  kubectl delete pods/nginx -n nginx
+ 1991  vi dep.yml
+ 1992  kubectl get deployments
  1993  kubectl get deployments -A
- 1994  vi dep.yml 
- 1995  kubectl apply -f dep.yml 
+ 1994  vi dep.yml
+ 1995  kubectl apply -f dep.yml
  1996  kubectl get deployments -A
  1997  cd Desktop/
  1998  cd k8s/
- 1999  ls 
- 2000  vi dep.yml 
+ 1999  ls
+ 2000  vi dep.yml
  2001  kubectl get pods
  2002  kubectl get deployment
  2003  kubectl scale deployment/nginx-deployment --replicas=5
  2004  kubectl get pods
- 2005  kubectl get pods -o wide 
- 2006  kubectl set image deployment/nginx-deployment nginx=nginx:1.29.0 
- 2007  kubectl get pods -o wide 
- 2008  kubectl set image deployment/nginx-deployment nginx=nginx:1 
- 2009  kubectl get pods -o wide 
+ 2005  kubectl get pods -o wide
+ 2006  kubectl set image deployment/nginx-deployment nginx=nginx:1.29.0
+ 2007  kubectl get pods -o wide
+ 2008  kubectl set image deployment/nginx-deployment nginx=nginx:1
+ 2009  kubectl get pods -o wide
  2010  clear
 
 minikube start --node 2 -p multi-cluster-node
  2052  minikube start --nodes 2 -p multi-cluster-node
- 2053  minikube profile list 
+ 2053  minikube profile list
  2054  minikube profile multi-cluster-node
  2055  kubectl get pv
  2056  clear
- 2057  minikube profile list 
+ 2057  minikube profile list
  2058  clear
- 2059  kubectl apply -f ns.yml 
- 2060  kubectl apply -f pv.yml 
- 2061  kubectl apply -f pvc.yml 
+ 2059  kubectl apply -f ns.yml
+ 2060  kubectl apply -f pv.yml
+ 2061  kubectl apply -f pvc.yml
  2062  kubectl get pv
- 2063  kubectl get pvc 
- 2064  kubectl get pvc -n nginx 
+ 2063  kubectl get pvc
+ 2064  kubectl get pvc -n nginx
  2065  kubectl describe pvc/local-pvc
  2066  kubectl describe pvc/local-pvc -n nginx
  2067  kubectl describe pv/local-pv -n nginx
  2068  clea r
  2069  clear
- 2070  kubectl apply -f dep.yml 
- 2071  kubectl get pods -n nginx 
+ 2070  kubectl apply -f dep.yml
+ 2071  kubectl get pods -n nginx
  2072  kubectl describe pods/nginx-deployment-5fcfbcddf8-d6r6m -n nginx
+ kubectl apply -f frontend-dep.yml -n nginx
+ 2008  kubectl apply -f frontend-svc.yml -n nginx
+ 2009  kubectl get svc -n nginx
+ 2010  kubectl apply -f frontend-svc.yml -n nginx
+ 2011  kubectl get svc -n nginx
+ 2012  kubectl apply -f frontend-svc.yml -n nginx
+ 2013  kubectl get svc -n nginx
+ 2014  kubectl port-forward svc/frontend-service 8083:8082 -n nginx
+ 2015  clear
+ 2016  minikube ingress
+ 2017  minikube --help
+ 2018  kubectl get pods -n ingress
+ 2019  minikube addons enable ingress
+ 2020  clear
+ 2021  kubectl get svc -n nginx
+ 2022  kubectl apply -f ingress.yml -n nginx
+ 2023  kubectl get svc -n nginx
+ 2024  kubectl get ingress -n nginx
+ 2025  kubectl port-forward ingress/example-ingress  8082:80 -n nginx
+ 2026  kubectl get services -n nginx
+ 2027  kubectl get pods -n nginx
+ 2028  kubectl port-forward svc/nginx-ingress-controller 8082:80 -n nginx
+ 2029  kubectl get ns -A
+ 2030  kubectl get svc -n ingress-nginx
+ 2031  kubectl port-forward -n ingress-nginx service/ingress-nginx-controller 8082:80
