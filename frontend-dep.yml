@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: frontend-deployment
+  namespace: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+
+  template:
+    metadata:
+      name: nginx-dep-pod
+      labels:
+        app: frontend
+
+    spec:
+      containers:
+        - name: frontend
+          image: rohankhanal14/3tier-docker-frontend:latest
+          ports:
+            - containerPort: 80
